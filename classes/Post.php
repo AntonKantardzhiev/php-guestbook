@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 class Post
 {
@@ -8,11 +8,11 @@ class Post
     protected string $content;
     protected string $author;
 
-
-    public function __construct(string $title, string $date, string $content, string $author)
+    public function __construct(string $title, $content, string $author)
     {
+        date_default_timezone_set("Europe/Brussels");
         $this->title = $title;
-        $this->date = $date;
+        $this->date = Date('D, d M Y');
         $this->content = $content;
         $this->author = $author;
     }
@@ -35,17 +35,6 @@ class Post
         $this->title = $title;
     }
 
-    public function getDate(): string
-    {
-        date_default_timezone_set("Europe/Brussels");
-        return $this->date;
-    }
-
-    public function setDate(string $date): void
-    {
-        $this->date = $date;
-    }
-
     public function getContent(): string
     {
         return $this->content;
@@ -65,6 +54,7 @@ class Post
     {
         $this->author = $author;
     }
+
 
 
 }
