@@ -9,14 +9,16 @@ session_start();
 
 if (isset($_POST['submit'])) {
 
-    if (!isset($_POST['title'],$_POST['content'], $_POST['author'])) {
+    if (!isset($_POST['title'], $_POST['content'], $_POST['author'])) {
         echo "You must fill in all the fields ";
     }
     $newP = new Post($_POST['title'], $_POST['content'], $_POST['author']);
     $newL = new PostLoader();
     $newL->writePost($newP);
+    if (isset($newL)) {
+        var_dump($newL->readPost());
 
-
+    }
 }
 ?>
 <!--Main Content--->
@@ -31,4 +33,4 @@ if (isset($_POST['submit'])) {
 
 
 <!--End Content--->
-<?php require "templates/footer.php";?>
+<?php require "templates/footer.php"; ?>
