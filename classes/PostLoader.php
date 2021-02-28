@@ -6,7 +6,7 @@ class PostLoader
 {
     private array $posts = [];
     public const DESTINATION = "classes/Posts.txt";
-    public const MAX_SHOWING_POSTS = 20;
+
 
     public function __construct()
     { if(file_exists( self::DESTINATION)){

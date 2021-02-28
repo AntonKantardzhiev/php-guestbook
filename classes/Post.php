@@ -8,7 +8,7 @@ class Post
     protected string $content;
     protected string $author;
 
-    public function __construct(string $title, $content, string $author)
+    public function __construct(string $title, string $content, string $author)
     {
         date_default_timezone_set("Europe/Brussels");
         $this->title = $title;
@@ -19,10 +19,12 @@ class Post
 
     public function toArray(): array
     {
-        return ['title' => $this->title,
+        return [
+            'title' => $this->title,
             'date' => $this->date,
             'content' => $this->content,
-            'author' => $this->author];
+            'author' => $this->author
+        ];
     }
 
     public function getTitle(): string
@@ -54,7 +56,6 @@ class Post
     {
         $this->author = $author;
     }
-
 
 
 }
