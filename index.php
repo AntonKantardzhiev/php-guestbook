@@ -7,18 +7,29 @@ require "classes/Posts.txt";
 
 session_start();
 
+if(!isset($_POST['submit'])){
+    $newL= new PostLoader();
+}
 if (isset($_POST['submit'])) {
-
-    if (!isset($_POST['title'], $_POST['content'], $_POST['author'])) {
+    function check(string $data) : string
+    {
+        return trim(htmlspecialchars($data, ENT_NOQUOTES, "UTF-8"));
+    }
+    if (!empty($_POST['title']&& $_POST['content']&& $_POST['author'])) {
+        $title = check($_POST['title']);
+        $content = check($_POST['content']);
+        $author = check($_POST['author']);
+        $newP = new Post($title,$content,$title);
+        $newL = new PostLoader();
+        $newL->writePost($newP);
+        header("Location:index.php");
+        exit;
+    }else{
         echo "You must fill in all the fields ";
     }
-    $newP = new Post($_POST['title'], $_POST['content'], $_POST['author']);
-    $newL = new PostLoader();
+    $newP = new Post(check($_POST['title']), check($_POST['content']), check($_POST['author']));
     $newL->writePost($newP);
-    if (isset($newL)) {
-        var_dump($newL->readPost());
 
-    }
 }
 ?>
 <!--Main Content--->
@@ -31,6 +42,18 @@ if (isset($_POST['submit'])) {
     </label>
 </form>
 
+<?php
+if (isset($newL)):
+    for ($i=0; $i<= 5; $i++):
+        $posts= $newL->getPosts();?>
+    <div class="post">
+        <p class="title"><?php echo ($posts[$i])->title?></p>
+        <p class="content"><?php echo ($posts[$i])->content?></p>
+        <p class="author"><?php echo ($posts[$i])->author?></p>
+        <p class="date"><?php echo ($posts[$i])->date?></p>
+    </div>
+
+
 
 <!--End Content--->
-<?php require "templates/footer.php"; ?>
+<?php endfor; endif; require "templates/footer.php"; ?>

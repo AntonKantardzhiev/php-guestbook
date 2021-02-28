@@ -6,6 +6,7 @@ class PostLoader
 {
     private array $posts = [];
     public const DESTINATION = "classes/Posts.txt";
+    public const MAX_SHOWING_POSTS = 20;
 
     public function __construct()
     { if(file_exists( self::DESTINATION)){
@@ -26,7 +27,7 @@ class PostLoader
     public function writePost(Post $newP): void
     {
         try {
-            $this->posts[]=$newP;
+            $this->posts[]=$newP->toArray();
             file_put_contents(self::DESTINATION,(json_encode($this->posts,JSON_THROW_ON_ERROR,512)));
 
         }catch (JsonException $exception){

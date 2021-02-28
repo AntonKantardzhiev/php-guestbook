@@ -19,7 +19,7 @@ class Post
 
     public function toArray(): array
     {
-        return ['name' => $this->title,
+        return ['title' => $this->title,
             'date' => $this->date,
             'content' => $this->content,
             'author' => $this->author];
