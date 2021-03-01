@@ -40,16 +40,16 @@ if (isset($_POST['submit'])) {
 </form>
 
 <?php
-    for ($i=0; $i<= MAX_SHOWING_POSTS; $i++):
+if(isset($newL)):
+    for ($i=0; $i<MAX_SHOWING_POSTS; $i++):
         $posts= $newL->readPost();
-        foreach ($posts as $post):
+
             ?>
     <div class="post">
-        <p class="title"><?php echo $post["title"]?></p>
-        <p class="content"><?php echo $post["content"]?></p>
-        <p class="author">-<i><?php echo $post["author"]; echo $post["date"]?></i></p>
+        <p class="title"><?php echo $posts[$i]["title"]?></p>
+        <p class="content"><?php echo $posts[$i]["content"]?></p>
+        <p class="author">-<i><?php echo $posts[$i]["author"]; echo $posts[$i]["date"]?></i></p>
         <br>
     </div>
-
 <!--End Content--->
-<?php endforeach; endfor; require "templates/footer.php"; ?>
+<?php  endfor; endif; require "templates/footer.php"; ?>
